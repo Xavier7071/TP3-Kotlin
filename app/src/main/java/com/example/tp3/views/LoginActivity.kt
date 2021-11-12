@@ -25,8 +25,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun connection() {
-        val username = findViewById<View>(R.id.username_input) as EditText
-        val password = findViewById<View>(R.id.password_input) as EditText
+        val username = findViewById<EditText>(R.id.username_input)
+        val password = findViewById<EditText>(R.id.password_input)
         val users = MainController.instance.getDatabase()!!.usersDAO().findAll()
         if (username.text.toString().isEmpty() || password.text.toString().isEmpty()) {
             Toast.makeText(

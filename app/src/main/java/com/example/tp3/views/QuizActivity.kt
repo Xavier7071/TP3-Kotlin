@@ -34,19 +34,19 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateScore() {
-        (findViewById<View>(R.id.score_view) as TextView).text = "Score: ${MainController.instance.getScore()}"
+        (findViewById<TextView>(R.id.score_view)).text = "Score: ${MainController.instance.getScore()}"
     }
 
     private fun updateWordsDone() {
-        (findViewById<View>(R.id.nbWord_view) as TextView).text = "${MainController.instance.getWordsDone()} of 10 words"
+        (findViewById<TextView>(R.id.nbWord_view)).text = "${MainController.instance.getWordsDone()} of 10 words"
     }
 
     private fun updateNbAttempts() {
-        (findViewById<View>(R.id.nbAttempts_view) as TextView).text = "Attempt #${nbAttempts} of 5 attempts"
+        (findViewById<TextView>(R.id.nbAttempts_view)).text = "Attempt #${nbAttempts} of 5 attempts"
     }
 
     private fun displayScrambledWord() {
-        (findViewById<View>(R.id.word_view) as TextView).text = MainController.instance.getScrambledWord()
+        (findViewById<TextView>(R.id.word_view)).text = MainController.instance.getScrambledWord()
     }
 
     private fun runQuestion() {

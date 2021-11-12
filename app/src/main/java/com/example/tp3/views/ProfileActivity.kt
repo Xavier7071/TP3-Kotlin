@@ -76,7 +76,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveChanges() {
-        val newPassword = findViewById<View>(R.id.newPassword_input) as EditText
+        val newPassword = findViewById<EditText>(R.id.newPassword_input)
     }
 
     private fun setRadioButtons() {
