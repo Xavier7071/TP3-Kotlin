@@ -3,12 +3,15 @@ package com.example.tp3.controllers
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
-import com.example.tp3.models.Statistics
+import com.example.tp3.models.GlobalStatistics
+import com.example.tp3.models.UserStatistics
 import com.example.tp3.models.Users
 import com.example.tp3.models.WordManager
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainController private constructor() {
-    private var statistics = Statistics()
+    private var statistics = UserStatistics()
     private var words = WordManager()
     private var userList = ArrayList<Users>()
     private var database: AppDatabase? = null
@@ -119,6 +122,17 @@ class MainController private constructor() {
                 username,
                 password,
                 "Easy"
+            )
+        )
+    }
+
+    fun insertStats(username: String, score: Int, date: Date) {
+        database!!.databaseDAO().insertStatistics(
+            GlobalStatistics (
+                (database!!.databaseDAO().findAllStatistics().lastIndex + 2),
+                username,
+                score,
+                date
             )
         )
     }

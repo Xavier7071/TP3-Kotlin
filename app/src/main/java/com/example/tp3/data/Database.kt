@@ -1,7 +1,7 @@
 package com.example.tp3.data
 
 import androidx.room.*
-import com.example.tp3.models.Leaderboard
+import com.example.tp3.models.GlobalStatistics
 import com.example.tp3.models.Users
 
 @Dao
@@ -31,26 +31,14 @@ interface Database {
     fun updateUser(user: Users)
 
     @Query("SELECT * FROM Statistics")
-    fun findAllStatistics(): List<Leaderboard>
+    fun findAllStatistics(): List<GlobalStatistics>
 
-    @Query("SELECT * FROM Statistics WHERE name IN (:name)")
-    fun findStatisticsByName(name: String): Leaderboard
+    @Query("SELECT * FROM Statistics ORDER BY score DESC, date LIMIT 10")
+    fun findBestStatistics(): List<GlobalStatistics>
 
     @Query("SELECT * FROM Statistics WHERE id IN (:id)")
-    fun findStatisticsById(id: Int): Leaderboard
+    fun findStatisticsById(id: Int): GlobalStatistics
 
     @Insert
-    fun insertAllStatistics(vararg leaderboard: Leaderboard)
-
-    @Insert
-    fun insertAllStatistics(leaderboard: List<Leaderboard>)
-
-    @Delete
-    fun deleteStatistics(statistics: Leaderboard)
-
-    @Insert
-    fun insertStatistics(statistics: Leaderboard)
-
-    @Update
-    fun updateStatistics(statistics: Leaderboard)
+    fun insertStatistics(statistics: GlobalStatistics)
 }

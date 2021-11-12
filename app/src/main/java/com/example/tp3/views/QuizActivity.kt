@@ -1,5 +1,6 @@
 package com.example.tp3.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -8,9 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tp3.R
 import com.example.tp3.controllers.MainController
+import com.example.tp3.models.Users
+import java.util.*
 
 class QuizActivity : AppCompatActivity() {
     private var nbAttempts = 1
+    private var user: Users? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +25,9 @@ class QuizActivity : AppCompatActivity() {
         submitBtn.setOnClickListener { validateWord() }
         val skipBtn = findViewById<Button>(R.id.skip_button)
         skipBtn.setOnClickListener { runQuestion() }
+
+        user = MainController.instance.getDatabase()!!.databaseDAO()
+            .findUserById(MainController.instance.getId())
 
         updateNbAttempts()
         updateScore()
@@ -63,6 +71,8 @@ class QuizActivity : AppCompatActivity() {
             updateWordsDone()
             nbAttempts = 1
             updateNbAttempts()
+        } else {
+            saveStatistics()
         }
     }
 
@@ -82,5 +92,11 @@ class QuizActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Try again", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun saveStatistics() {
+        MainController.instance.insertStats(user!!.name, MainController.instance.getScore(), Calendar.getInstance().time)
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
     }
 }

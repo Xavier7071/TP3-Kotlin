@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TP3">
         <activity
+            android:name=".views.LeaderboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.ProfileActivity"
             android:exported="false" />
         <activity

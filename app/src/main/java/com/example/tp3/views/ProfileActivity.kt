@@ -73,7 +73,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun goToLeaderboard() {
-        TODO("Not yet implemented")
+        val intent = Intent(this, LeaderboardActivity::class.java)
+        startActivity(intent)
     }
 
     private fun saveChanges() {
