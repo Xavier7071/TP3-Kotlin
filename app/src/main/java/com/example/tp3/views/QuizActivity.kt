@@ -73,7 +73,7 @@ class QuizActivity : AppCompatActivity() {
                 runQuestion()
             } else {
                 updateNbAttempts()
-                Toast.makeText(applicationContext, "Essayer encore", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Try again", Toast.LENGTH_LONG).show()
             }
         }
     }

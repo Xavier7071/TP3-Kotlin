@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -77,6 +78,16 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun saveChanges() {
         val newPassword = findViewById<EditText>(R.id.newPassword_input)
+        if (newPassword.text.toString().isNotEmpty()) {
+            user!!.password = newPassword.text.toString()
+        }
+        if (findViewById<RadioButton>(R.id.easy_button).isChecked) {
+            user!!.difficulty = "Easy"
+        } else {
+            user!!.difficulty = "Hard"
+        }
+        MainController.instance.getDatabase()!!.usersDAO().update(user!!)
+        Toast.makeText(applicationContext, "Successfully saved", Toast.LENGTH_LONG).show()
     }
 
     private fun setRadioButtons() {
