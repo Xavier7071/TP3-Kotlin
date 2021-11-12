@@ -1,12 +1,11 @@
 package com.example.tp3.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tp3.R
 import com.example.tp3.controllers.MainController
 
@@ -24,8 +23,13 @@ class QuizActivity : AppCompatActivity() {
 
         updateNbAttempts()
         updateScore()
-        println(MainController.instance.getDatabase()!!.usersDAO().findById(MainController.instance.getId()))
-        if (MainController.instance.getDatabase()!!.usersDAO().findById(MainController.instance.getId()).difficulty == "Easy") {
+        println(
+            MainController.instance.getDatabase()!!.databaseDAO()
+                .findUserById(MainController.instance.getId())
+        )
+        if (MainController.instance.getDatabase()!!.databaseDAO()
+                .findUserById(MainController.instance.getId()).difficulty == "Easy"
+        ) {
             MainController.instance.initializeEasyWords()
         } else {
             MainController.instance.initializeHardWords()
@@ -34,11 +38,13 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateScore() {
-        (findViewById<TextView>(R.id.score_view)).text = "Score: ${MainController.instance.getScore()}"
+        (findViewById<TextView>(R.id.score_view)).text =
+            "Score: ${MainController.instance.getScore()}"
     }
 
     private fun updateWordsDone() {
-        (findViewById<TextView>(R.id.nbWord_view)).text = "${MainController.instance.getWordsDone()} of 10 words"
+        (findViewById<TextView>(R.id.nbWord_view)).text =
+            "${MainController.instance.getWordsDone()} of 10 words"
     }
 
     private fun updateNbAttempts() {

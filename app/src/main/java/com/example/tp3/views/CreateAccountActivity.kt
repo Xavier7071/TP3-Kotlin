@@ -2,7 +2,6 @@ package com.example.tp3.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -22,7 +21,7 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun createAccount() {
         val username = findViewById<EditText>(R.id.username_input)
         val password = findViewById<EditText>(R.id.password_input)
-        val users = MainController.instance.getDatabase()!!.usersDAO().findAll()
+        val users = MainController.instance.getDatabase()!!.databaseDAO().findAllUsers()
         if (username.text.toString().isEmpty() || password.text.toString().isEmpty()) {
             Toast.makeText(
                 this, "Information needs to be filled",

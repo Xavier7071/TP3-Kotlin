@@ -3,7 +3,6 @@ package com.example.tp3.views
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -44,7 +43,8 @@ class ProfileActivity : AppCompatActivity() {
             true
         }
 
-        user = MainController.instance.getDatabase()!!.usersDAO().findById(MainController.instance.getId())
+        user = MainController.instance.getDatabase()!!.databaseDAO()
+            .findUserById(MainController.instance.getId())
         setRadioButtons()
     }
 
@@ -86,7 +86,7 @@ class ProfileActivity : AppCompatActivity() {
         } else {
             user!!.difficulty = "Hard"
         }
-        MainController.instance.getDatabase()!!.usersDAO().update(user!!)
+        MainController.instance.getDatabase()!!.databaseDAO().updateUser(user!!)
         Toast.makeText(applicationContext, "Successfully saved", Toast.LENGTH_LONG).show()
     }
 

@@ -32,7 +32,7 @@ class MainController private constructor() {
             .build()
 
         try {
-            database!!.usersDAO().insertAll(userList)
+            database!!.databaseDAO().insertAllUsers(userList)
         } catch (ex: Exception) {
             Log.d("logdemo", "Records already in Database: ${ex.message}")
         }
@@ -113,6 +113,13 @@ class MainController private constructor() {
     }
 
     fun insertUser(username: String, password: String) {
-        database!!.usersDAO().insert(Users((database!!.usersDAO().findAll().lastIndex + 2), username, password, "Easy"))
+        database!!.databaseDAO().insertUser(
+            Users(
+                (database!!.databaseDAO().findAllUsers().lastIndex + 2),
+                username,
+                password,
+                "Easy"
+            )
+        )
     }
 }
