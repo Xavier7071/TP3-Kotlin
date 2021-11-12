@@ -15,13 +15,13 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
 
-        val createBtn = findViewById<Button>(R.id.createBtn)
+        val createBtn = findViewById<Button>(R.id.create_button)
         createBtn.setOnClickListener { createAccount() }
     }
 
     private fun createAccount() {
-        val username = findViewById<View>(R.id.usernameInput) as EditText
-        val password = findViewById<View>(R.id.passwordInput) as EditText
+        val username = findViewById<View>(R.id.username_input) as EditText
+        val password = findViewById<View>(R.id.password_input) as EditText
         val users = MainController.instance.getDatabase()!!.usersDAO().findAll()
         if (username.text.toString().isEmpty() || password.text.toString().isEmpty()) {
             Toast.makeText(

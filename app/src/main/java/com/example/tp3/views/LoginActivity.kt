@@ -18,9 +18,9 @@ class LoginActivity : AppCompatActivity() {
 
         MainController.instance.loadDatabase(applicationContext)
 
-        val connectBtn = findViewById<Button>(R.id.connectButton)
+        val connectBtn = findViewById<Button>(R.id.connect_button)
         connectBtn.setOnClickListener { connection() }
-        val createBtn = findViewById<Button>(R.id.createBtn)
+        val createBtn = findViewById<Button>(R.id.create_button)
         createBtn.setOnClickListener { createAccount() }
     }
 
@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             } else {
                 MainController.instance.updateId(MainController.instance.getDatabase()!!.usersDAO().findByName(username.text.toString()).id)
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)
             }
         }

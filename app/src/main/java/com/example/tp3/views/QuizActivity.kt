@@ -17,9 +17,9 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        val submitBtn = findViewById<Button>(R.id.submitBtn)
+        val submitBtn = findViewById<Button>(R.id.submit_button)
         submitBtn.setOnClickListener { validateWord() }
-        val skipBtn = findViewById<Button>(R.id.skipBtn)
+        val skipBtn = findViewById<Button>(R.id.skip_button)
         skipBtn.setOnClickListener { runQuestion() }
 
         updateNbAttempts()
@@ -34,19 +34,19 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateScore() {
-        (findViewById<View>(R.id.scoreView) as TextView).text = "Score: ${MainController.instance.getScore()}"
+        (findViewById<View>(R.id.score_view) as TextView).text = "Score: ${MainController.instance.getScore()}"
     }
 
     private fun updateWordsDone() {
-        (findViewById<View>(R.id.nbWordsView) as TextView).text = "${MainController.instance.getWordsDone()} of 10 words"
+        (findViewById<View>(R.id.nbWord_view) as TextView).text = "${MainController.instance.getWordsDone()} of 10 words"
     }
 
     private fun updateNbAttempts() {
-        (findViewById<View>(R.id.nbAttemptsView) as TextView).text = "Attempt #${nbAttempts} of 5 attempts"
+        (findViewById<View>(R.id.nbAttempts_view) as TextView).text = "Attempt #${nbAttempts} of 5 attempts"
     }
 
     private fun displayScrambledWord() {
-        (findViewById<View>(R.id.wordView) as TextView).text = MainController.instance.getScrambledWord()
+        (findViewById<View>(R.id.word_view) as TextView).text = MainController.instance.getScrambledWord()
     }
 
     private fun runQuestion() {
@@ -61,7 +61,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun validateWord() {
-        val userInput = findViewById<EditText>(R.id.textInput).text.toString()
+        val userInput = findViewById<EditText>(R.id.text_input).text.toString()
         if (userInput == MainController.instance.getCorrectWord()) {
             MainController.instance.incrementScore()
             updateScore()

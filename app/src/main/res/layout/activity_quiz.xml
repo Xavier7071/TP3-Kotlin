@@ -7,7 +7,7 @@
     tools:context=".views.QuizActivity">
 
     <EditText
-        android:id="@+id/textInput"
+        android:id="@+id/text_input"
         android:layout_width="297dp"
         android:layout_height="69dp"
         android:layout_marginBottom="268dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/skipBtn"
+        android:id="@+id/skip_button"
         android:layout_width="133dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/submitBtn"
+        android:id="@+id/submit_button"
         android:layout_width="133dp"
         android:layout_height="65dp"
         android:layout_marginEnd="16dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/wordView"
+        android:id="@+id/word_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="148dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/scoreView"
+        android:id="@+id/score_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nbWordsView"
+        android:id="@+id/nbWord_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nbAttemptsView"
+        android:id="@+id/nbAttempts_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"

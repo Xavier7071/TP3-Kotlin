@@ -3,21 +3,30 @@ package com.example.tp3.views
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.tp3.R
+import com.example.tp3.controllers.MainController
+import com.example.tp3.models.Users
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
+    private var user: Users? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_profile)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navView)
+        val saveButton = findViewById<Button>(R.id.save_button)
+        saveButton.setOnClickListener { saveChanges() }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -33,6 +42,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        user = MainController.instance.getDatabase()!!.usersDAO().findById(MainController.instance.getId())
+        setRadioButtons()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -45,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToProfile() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
     }
 
@@ -61,5 +73,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun goToLeaderboard() {
         TODO("Not yet implemented")
+    }
+
+    private fun saveChanges() {
+        val newPassword = findViewById<View>(R.id.newPassword_input) as EditText
+    }
+
+    private fun setRadioButtons() {
+        if (user!!.difficulty == "Easy") {
+            findViewById<RadioButton>(R.id.easy_button).isChecked = true
+        } else {
+            findViewById<RadioButton>(R.id.hard_button).isChecked = true
+        }
     }
 }

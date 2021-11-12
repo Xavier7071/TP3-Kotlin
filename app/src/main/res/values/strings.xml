@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">exerciceKotlin1</string>
+    <string name="app_name">TP3</string>
     <string name="connection">Connection</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -11,4 +11,10 @@
     <string name="create_an_account">Create an account</string>
     <string name="open">Ouvrir</string>
     <string name="close">Close</string>
+    <string name="easy">Easy</string>
+    <string name="hard">Hard</string>
+    <string name="change_password">Change password</string>
+    <string name="my_profile">My profile</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="save_changes">Save changes</string>
 </resources>
