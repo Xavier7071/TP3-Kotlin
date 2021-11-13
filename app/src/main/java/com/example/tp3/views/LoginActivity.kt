@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                MainController.instance.updateId(
+                MainController.instance.setId(
                     MainController.instance.getDatabase()!!.databaseDAO()
                         .findUserByName(username.text.toString()).id
                 )

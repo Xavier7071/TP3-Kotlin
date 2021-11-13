@@ -21,18 +21,50 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
+        if (savedInstanceState != null) {
+            loadData(savedInstanceState)
+        } else {
+            startGame()
+        }
+
         val submitBtn = findViewById<Button>(R.id.submit_button)
         submitBtn.setOnClickListener { validateWord() }
         val skipBtn = findViewById<Button>(R.id.skip_button)
         skipBtn.setOnClickListener { runQuestion() }
+    }
 
-        user = MainController.instance.getDatabase()!!.databaseDAO()
-            .findUserById(MainController.instance.getId())
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("NBATTEMPTS", nbAttempts)
+        outState.putInt("SCORE", MainController.instance.getScore())
+        outState.putInt("ID", MainController.instance.getId())
+        outState.putInt("WORDSDONE", MainController.instance.getWordsDone())
+        outState.putString("SCRAMBLEDWORD", MainController.instance.getScrambledWord())
+        outState.putString("CORRECTWORD", MainController.instance.getCorrectWord())
+        outState.putStringArrayList("WORDS", MainController.instance.getWords())
+        outState.putStringArrayList("REMOVEDWORDS", MainController.instance.getRemovedWords())
+        super.onSaveInstanceState(outState)
+    }
 
-        MainController.instance.resetQuiz()
+    private fun loadData(savedInstanceState: Bundle?) {
+        nbAttempts = savedInstanceState!!.getInt("NBATTEMPTS")
+        MainController.instance.setScore(savedInstanceState.getInt("SCORE"))
+        MainController.instance.setId(savedInstanceState.getInt("ID"))
+        MainController.instance.setWordsDone(savedInstanceState.getInt("WORDSDONE"))
+        MainController.instance.setScrambledWord(savedInstanceState.getString("SCRAMBLEDWORD")!!)
+        MainController.instance.setCorrectWord(savedInstanceState.getString("CORRECTWORD")!!)
+        MainController.instance.setWords(savedInstanceState.getStringArrayList("WORDS")!!)
+        MainController.instance.setRemovedWords(savedInstanceState.getStringArrayList("REMOVEDWORDS")!!)
+        user = MainController.instance.getDatabase()!!.databaseDAO().findUserById(MainController.instance.getId())
         updateNbAttempts()
         updateScore()
+        updateWordsDone()
+        displayScrambledWord()
+    }
 
+    private fun startGame() {
+        MainController.instance.resetQuiz()
+        user = MainController.instance.getDatabase()!!.databaseDAO()
+            .findUserById(MainController.instance.getId())
         if (MainController.instance.getDatabase()!!.databaseDAO()
                 .findUserById(MainController.instance.getId()).difficulty == "Easy"
         ) {
@@ -41,6 +73,8 @@ class QuizActivity : AppCompatActivity() {
             MainController.instance.initializeHardWords()
         }
         runQuestion()
+        updateNbAttempts()
+        updateScore()
     }
 
     private fun updateScore() {

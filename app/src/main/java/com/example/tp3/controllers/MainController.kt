@@ -1,6 +1,7 @@
 package com.example.tp3.controllers
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.room.Room
 import com.example.tp3.models.GlobalStatistics
@@ -117,6 +118,14 @@ class MainController private constructor() {
         statistics.wordsDone += 1
     }
 
+    fun setWordsDone(wordsDone: Int) {
+        statistics.wordsDone = wordsDone
+    }
+
+    fun setScore(score: Int) {
+        statistics.score = score
+    }
+
     fun resetQuiz() {
         statistics.wordsDone = 0
         statistics.score = 0
@@ -130,7 +139,7 @@ class MainController private constructor() {
         return statistics.wordsDone
     }
 
-    fun updateId(id: Int) {
+    fun setId(id: Int) {
         statistics.id = id
     }
 
@@ -142,8 +151,32 @@ class MainController private constructor() {
         return words!!.scrambledWord
     }
 
+    fun setScrambledWord(scrambledWord: String) {
+        words!!.scrambledWord = scrambledWord
+    }
+
+    fun getWords(): ArrayList<String> {
+        return words!!.words
+    }
+
+    fun setWords(savedWords: ArrayList<String>) {
+        words!!.words = savedWords
+    }
+
+    fun getRemovedWords(): ArrayList<String> {
+        return words!!.removedWords
+    }
+
+    fun setRemovedWords(savedRemovedWords: ArrayList<String>) {
+        words!!.removedWords = savedRemovedWords
+    }
+
     fun getCorrectWord(): String {
         return words!!.correctWord
+    }
+
+    fun setCorrectWord(correctWord: String) {
+        words!!.correctWord = correctWord
     }
 
     fun chooseRandomWord() {
