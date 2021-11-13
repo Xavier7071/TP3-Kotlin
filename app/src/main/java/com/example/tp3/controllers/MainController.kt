@@ -31,9 +31,30 @@ class MainController private constructor() {
         userList.add(Users(2, "Christopher", "Masse", "Easy"))
         userList.add(Users(3, "Admin", "admin", "Easy"))
 
-        globalStatistics.add(GlobalStatistics(1, "Xavier", 20, SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("10 11 2021")))
-        globalStatistics.add(GlobalStatistics(2, "Christopher", 20, SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("12 10 2021")))
-        globalStatistics.add(GlobalStatistics(3, "Admin", 10, SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("1 11 2021")))
+        globalStatistics.add(
+            GlobalStatistics(
+                1,
+                "Xavier",
+                20,
+                SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("10 11 2021")
+            )
+        )
+        globalStatistics.add(
+            GlobalStatistics(
+                2,
+                "Christopher",
+                20,
+                SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("12 10 2021")
+            )
+        )
+        globalStatistics.add(
+            GlobalStatistics(
+                3,
+                "Admin",
+                10,
+                SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("1 11 2021")
+            )
+        )
 
         database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database")
             .allowMainThreadQueries()
@@ -168,7 +189,14 @@ class MainController private constructor() {
         val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
         simpleDateFormat.timeZone = timeZone
         globalStatistics.clear()
-        globalStatistics.addAll(database!!.databaseDAO().findStatisticsWithFilter(SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time))))
+        globalStatistics.addAll(
+            database!!.databaseDAO().findStatisticsWithFilter(
+                SimpleDateFormat(
+                    "EE MMM dd HH:mm:ss zzz yyyy",
+                    Locale.CANADA
+                ).parse(simpleDateFormat.format(calendar.time))
+            )
+        )
         return globalStatistics
     }
 
@@ -179,7 +207,14 @@ class MainController private constructor() {
         val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
         simpleDateFormat.timeZone = timeZone
         globalStatistics.clear()
-        globalStatistics.addAll(database!!.databaseDAO().findStatisticsWithFilter(SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time))))
+        globalStatistics.addAll(
+            database!!.databaseDAO().findStatisticsWithFilter(
+                SimpleDateFormat(
+                    "EE MMM dd HH:mm:ss zzz yyyy",
+                    Locale.CANADA
+                ).parse(simpleDateFormat.format(calendar.time))
+            )
+        )
         return globalStatistics
     }
 }

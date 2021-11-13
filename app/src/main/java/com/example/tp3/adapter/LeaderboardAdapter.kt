@@ -10,7 +10,6 @@ import com.example.tp3.R
 import com.example.tp3.models.GlobalStatistics
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class LeaderboardAdapter(private var list: ArrayList<GlobalStatistics>) :
     RecyclerView.Adapter<LeaderboardAdapter.ViewHolder>() {
