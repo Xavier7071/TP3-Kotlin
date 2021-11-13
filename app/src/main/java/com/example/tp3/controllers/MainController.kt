@@ -14,6 +14,7 @@ class MainController private constructor() {
     private var statistics = UserStatistics()
     private var words = WordManager()
     private var userList = ArrayList<Users>()
+    private var globalStatistics = ArrayList<GlobalStatistics>()
     private var database: AppDatabase? = null
 
     private object HOLDER {
@@ -135,5 +136,10 @@ class MainController private constructor() {
                 date
             )
         )
+    }
+
+    fun getLeaderboard() : ArrayList<GlobalStatistics> {
+       globalStatistics.addAll(database!!.databaseDAO().findBestStatistics())
+        return globalStatistics
     }
 }

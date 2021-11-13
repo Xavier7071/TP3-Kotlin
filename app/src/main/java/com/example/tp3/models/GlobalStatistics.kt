@@ -12,5 +12,6 @@ data class GlobalStatistics(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "score") var score: Int,
-    @ColumnInfo(name = "date") @TypeConverters(DateConverter::class) var date: Date
+    @ColumnInfo(name = "date")
+    @TypeConverters(DateConverter::class) var date: Date
 )
