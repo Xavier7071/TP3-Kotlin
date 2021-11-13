@@ -183,36 +183,27 @@ class MainController private constructor() {
     }
 
     fun get7DaysLeaderboard(): ArrayList<GlobalStatistics> {
-        val timeZone = TimeZone.getTimeZone("America/Montreal")
-        val calendar = Calendar.getInstance(timeZone)
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.HOUR_OF_DAY, -5)
         calendar.add(Calendar.DAY_OF_YEAR, -7)
-        val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
-        simpleDateFormat.timeZone = timeZone
+
         globalStatistics.clear()
         globalStatistics.addAll(
             database!!.databaseDAO().findStatisticsWithFilter(
-                SimpleDateFormat(
-                    "EE MMM dd HH:mm:ss zzz yyyy",
-                    Locale.CANADA
-                ).parse(simpleDateFormat.format(calendar.time))
+                calendar.time
             )
         )
         return globalStatistics
     }
 
     fun get30DaysLeaderboard(): ArrayList<GlobalStatistics> {
-        val timeZone = TimeZone.getTimeZone("America/Montreal")
-        val calendar = Calendar.getInstance(timeZone)
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.HOUR_OF_DAY, -5)
         calendar.add(Calendar.DAY_OF_YEAR, -30)
-        val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
-        simpleDateFormat.timeZone = timeZone
         globalStatistics.clear()
         globalStatistics.addAll(
             database!!.databaseDAO().findStatisticsWithFilter(
-                SimpleDateFormat(
-                    "EE MMM dd HH:mm:ss zzz yyyy",
-                    Locale.CANADA
-                ).parse(simpleDateFormat.format(calendar.time))
+                calendar.time
             )
         )
         return globalStatistics

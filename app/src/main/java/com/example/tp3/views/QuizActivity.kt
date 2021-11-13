@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tp3.R
 import com.example.tp3.controllers.MainController
 import com.example.tp3.models.Users
-import java.text.SimpleDateFormat
 import java.util.*
 
 class QuizActivity : AppCompatActivity() {
@@ -95,18 +94,12 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun saveStatistics() {
-        val timeZone = TimeZone.getTimeZone("America/Montreal")
-        val calendar = Calendar.getInstance(timeZone)
-        calendar.add(Calendar.DAY_OF_YEAR, -1)
-        val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
-        simpleDateFormat.timeZone = timeZone
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.HOUR_OF_DAY, -5)
         MainController.instance.insertStats(
             user!!.name,
             MainController.instance.getScore(),
-            SimpleDateFormat(
-                "EE MMM dd HH:mm:ss zzz yyyy",
-                Locale.CANADA
-            ).parse(simpleDateFormat.format(calendar.time))
+            calendar.time
         )
 
         val intent = Intent(this, ProfileActivity::class.java)
