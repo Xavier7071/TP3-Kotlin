@@ -41,5 +41,4 @@ class LeaderboardAdapter(private var list: ArrayList<GlobalStatistics>) :
         holder.score.text = "${current.score} points"
         holder.date.text = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).format(current.date)
     }
-
 }
