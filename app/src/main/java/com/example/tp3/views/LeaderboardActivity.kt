@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3.R
 import com.example.tp3.adapter.LeaderboardAdapter
@@ -20,8 +21,7 @@ class LeaderboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leaderboard)
 
-        rvMain = findViewById(R.id.rvMain)
-        rvMain.adapter = LeaderboardAdapter(MainController.instance.getLeaderboard())
+        filterLeaderboard()
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navView)
@@ -49,6 +49,13 @@ class LeaderboardActivity : AppCompatActivity() {
             when (item.itemId) {
                 else -> super.onOptionsItemSelected(item)
             }
+    }
+
+    private fun filterLeaderboard() {
+        rvMain = findViewById(R.id.rvMain)
+
+        rvMain.adapter = LeaderboardAdapter(MainController.instance.getLeaderboard())
+        rvMain.layoutManager = LinearLayoutManager(this)
     }
 
     private fun goToProfile() {

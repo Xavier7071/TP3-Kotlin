@@ -33,7 +33,7 @@ interface Database {
     @Query("SELECT * FROM Statistics")
     fun findAllStatistics(): List<GlobalStatistics>
 
-    @Query("SELECT * FROM Statistics ORDER BY score DESC, date LIMIT 10")
+    @Query("SELECT * FROM Statistics ORDER BY score DESC, date DESC LIMIT 10")
     fun findBestStatistics(): List<GlobalStatistics>
 
     @Query("SELECT * FROM Statistics WHERE id IN (:id)")

@@ -1,19 +1,23 @@
 package com.example.tp3.controllers
 
 import androidx.room.TypeConverter
-import java.sql.*
+import java.util.*
 
 class DateConverter {
-    @TypeConverter
-    fun toDate(timestamp: Long?): Date? {
-        return when (timestamp) {
-            null -> null
-            else -> Date(timestamp)
+    companion object {
+        @TypeConverter
+        @JvmStatic
+        fun toDate(timestamp: Long?): Date? {
+            return when (timestamp) {
+                null -> null
+                else -> Date(timestamp)
+            }
         }
-    }
 
-    @TypeConverter
-    fun toTimestamp(date: Date?): Long? {
-        return date?.time
+        @TypeConverter
+        @JvmStatic
+        fun fromDate(date: Date?): Long? {
+            return date?.time
+        }
     }
 }

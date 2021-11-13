@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tp3.R
 import com.example.tp3.models.GlobalStatistics
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LeaderboardAdapter(private var list: ArrayList<GlobalStatistics>) :
     RecyclerView.Adapter<LeaderboardAdapter.ViewHolder>() {
@@ -35,9 +38,9 @@ class LeaderboardAdapter(private var list: ArrayList<GlobalStatistics>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = list[position]
-        holder.name.text = current.name
+        holder.name.text = "${position + 1}- ${current.name}"
         holder.score.text = "${current.score} points"
-        holder.date.text = current.date.toString()
+        holder.date.text = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).format(current.date)
     }
 
 }

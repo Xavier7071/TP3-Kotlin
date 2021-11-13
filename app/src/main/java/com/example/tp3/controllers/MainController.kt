@@ -12,7 +12,7 @@ import kotlin.collections.ArrayList
 
 class MainController private constructor() {
     private var statistics = UserStatistics()
-    private var words = WordManager()
+    private var words: WordManager? = null
     private var userList = ArrayList<Users>()
     private var globalStatistics = ArrayList<GlobalStatistics>()
     private var database: AppDatabase? = null
@@ -43,29 +43,31 @@ class MainController private constructor() {
     }
 
     fun initializeEasyWords() {
-        words.words.add("test")
-        words.words.add("apple")
-        words.words.add("math")
-        words.words.add("monkey")
-        words.words.add("peach")
-        words.words.add("video")
-        words.words.add("movie")
-        words.words.add("game")
-        words.words.add("orange")
-        words.words.add("player")
+        words = WordManager()
+        words!!.words.add("test")
+        words!!.words.add("apple")
+        words!!.words.add("math")
+        words!!.words.add("monkey")
+        words!!.words.add("peach")
+        words!!.words.add("video")
+        words!!.words.add("movie")
+        words!!.words.add("game")
+        words!!.words.add("orange")
+        words!!.words.add("player")
     }
 
     fun initializeHardWords() {
-        words.words.add("science")
-        words.words.add("ancient")
-        words.words.add("computer")
-        words.words.add("programming")
-        words.words.add("multiple")
-        words.words.add("increment")
-        words.words.add("monster")
-        words.words.add("headphone")
-        words.words.add("manager")
-        words.words.add("fortnite")
+        words = WordManager()
+        words!!.words.add("science")
+        words!!.words.add("ancient")
+        words!!.words.add("computer")
+        words!!.words.add("programming")
+        words!!.words.add("multiple")
+        words!!.words.add("increment")
+        words!!.words.add("monster")
+        words!!.words.add("headphone")
+        words!!.words.add("manager")
+        words!!.words.add("fortnite")
     }
 
     fun incrementScore() {
@@ -82,6 +84,11 @@ class MainController private constructor() {
 
     fun incrementWordsDone() {
         statistics.wordsDone += 1
+    }
+
+    fun resetQuiz() {
+        statistics.wordsDone = 0
+        statistics.score = 0
     }
 
     fun getScore(): Int {
@@ -101,15 +108,15 @@ class MainController private constructor() {
     }
 
     fun getScrambledWord(): String {
-        return words.scrambledWord
+        return words!!.scrambledWord
     }
 
     fun getCorrectWord(): String {
-        return words.correctWord
+        return words!!.correctWord
     }
 
     fun chooseRandomWord() {
-        words.chooseRandomWord()
+        words!!.chooseRandomWord()
     }
 
     fun getDatabase(): AppDatabase? {
@@ -127,9 +134,9 @@ class MainController private constructor() {
         )
     }
 
-    fun insertStats(username: String, score: Int, date: Date) {
+    fun insertStats(username: String, score: Int, date: Date?) {
         database!!.databaseDAO().insertStatistics(
-            GlobalStatistics (
+            GlobalStatistics(
                 (database!!.databaseDAO().findAllStatistics().lastIndex + 2),
                 username,
                 score,
@@ -138,8 +145,9 @@ class MainController private constructor() {
         )
     }
 
-    fun getLeaderboard() : ArrayList<GlobalStatistics> {
-       globalStatistics.addAll(database!!.databaseDAO().findBestStatistics())
+    fun getLeaderboard(): ArrayList<GlobalStatistics> {
+        globalStatistics.clear()
+        globalStatistics.addAll(database!!.databaseDAO().findBestStatistics())
         return globalStatistics
     }
 }

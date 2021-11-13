@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tp3.R
 import com.example.tp3.controllers.MainController
 import com.example.tp3.models.Users
+import java.text.SimpleDateFormat
 import java.util.*
 
 class QuizActivity : AppCompatActivity() {
@@ -29,12 +30,10 @@ class QuizActivity : AppCompatActivity() {
         user = MainController.instance.getDatabase()!!.databaseDAO()
             .findUserById(MainController.instance.getId())
 
+        MainController.instance.resetQuiz()
         updateNbAttempts()
         updateScore()
-        println(
-            MainController.instance.getDatabase()!!.databaseDAO()
-                .findUserById(MainController.instance.getId())
-        )
+
         if (MainController.instance.getDatabase()!!.databaseDAO()
                 .findUserById(MainController.instance.getId()).difficulty == "Easy"
         ) {
@@ -84,6 +83,7 @@ class QuizActivity : AppCompatActivity() {
             runQuestion()
         } else {
             MainController.instance.decreaseScore()
+            updateScore()
             nbAttempts++
             if (nbAttempts > 5) {
                 runQuestion()
@@ -95,7 +95,12 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun saveStatistics() {
-        MainController.instance.insertStats(user!!.name, MainController.instance.getScore(), Calendar.getInstance().time)
+        val timeZone = TimeZone.getTimeZone("America/Montreal")
+        val calendar = Calendar.getInstance(timeZone)
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA)
+        simpleDateFormat.timeZone = timeZone
+        MainController.instance.insertStats(user!!.name, MainController.instance.getScore(), SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time)))
+
         val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
     }
