@@ -1,10 +1,11 @@
 package com.example.tp3.views
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.RadioButton
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,16 +16,23 @@ import com.google.android.material.navigation.NavigationView
 
 class LeaderboardActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var rvMain : RecyclerView
+    private lateinit var rvMain: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leaderboard)
 
-        filterLeaderboard()
-
+        val allButton = findViewById<RadioButton>(R.id.all_button)
+        val sevenDaysButton = findViewById<RadioButton>(R.id.sevenDays_button)
+        val thirtyDaysButton = findViewById<RadioButton>(R.id.thirtyDays_button)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.navView)
+
+        allButton.setOnClickListener { filterLeaderboard() }
+        sevenDaysButton.setOnClickListener { filterLeaderboard() }
+        thirtyDaysButton.setOnClickListener { filterLeaderboard() }
+        allButton.isChecked = true
+        filterLeaderboard()
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -53,8 +61,17 @@ class LeaderboardActivity : AppCompatActivity() {
 
     private fun filterLeaderboard() {
         rvMain = findViewById(R.id.rvMain)
-
-        rvMain.adapter = LeaderboardAdapter(MainController.instance.getLeaderboard())
+        when {
+            findViewById<RadioButton>(R.id.all_button).isChecked -> {
+                rvMain.adapter = LeaderboardAdapter(MainController.instance.getAllLeaderboard())
+            }
+            findViewById<RadioButton>(R.id.sevenDays_button).isChecked -> {
+                rvMain.adapter = LeaderboardAdapter(MainController.instance.get7DaysLeaderboard())
+            }
+            else -> {
+                rvMain.adapter = LeaderboardAdapter(MainController.instance.get30DaysLeaderboard())
+            }
+        }
         rvMain.layoutManager = LinearLayoutManager(this)
     }
 

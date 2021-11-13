@@ -75,14 +75,14 @@
             app:layout_constraintVertical_bias="0.676">
 
             <RadioButton
-                android:id="@+id/easy_button"
+                android:id="@+id/all_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="100dp"
                 android:text="@string/easy" />
 
             <RadioButton
-                android:id="@+id/hard_button"
+                android:id="@+id/sevenDays_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hard" />

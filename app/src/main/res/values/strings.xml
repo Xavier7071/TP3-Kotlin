@@ -18,4 +18,7 @@
     <string name="difficulty">Difficulty</string>
     <string name="save_changes">Save changes</string>
     <string name="leaderboard">Leaderboard</string>
+    <string name="last_30_days">Last 30 days</string>
+    <string name="last_7_days">Last 7 days</string>
+    <string name="all">All</string>
 </resources>

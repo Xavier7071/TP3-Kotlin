@@ -3,6 +3,7 @@ package com.example.tp3.data
 import androidx.room.*
 import com.example.tp3.models.GlobalStatistics
 import com.example.tp3.models.Users
+import java.util.*
 
 @Dao
 interface Database {
@@ -36,9 +37,15 @@ interface Database {
     @Query("SELECT * FROM Statistics ORDER BY score DESC, date DESC LIMIT 10")
     fun findBestStatistics(): List<GlobalStatistics>
 
+    @Query("SELECT * FROM Statistics WHERE date >= :date ORDER BY score DESC, date DESC LIMIT 10")
+    fun findStatisticsWithFilter(date: Date?): List<GlobalStatistics>
+
     @Query("SELECT * FROM Statistics WHERE id IN (:id)")
     fun findStatisticsById(id: Int): GlobalStatistics
 
     @Insert
     fun insertStatistics(statistics: GlobalStatistics)
+
+    @Insert
+    fun insertAllStatistics(statistics: List<GlobalStatistics>)
 }

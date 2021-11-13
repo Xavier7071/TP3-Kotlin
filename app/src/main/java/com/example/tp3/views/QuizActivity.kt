@@ -97,9 +97,10 @@ class QuizActivity : AppCompatActivity() {
     private fun saveStatistics() {
         val timeZone = TimeZone.getTimeZone("America/Montreal")
         val calendar = Calendar.getInstance(timeZone)
-        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA)
+        calendar.add(Calendar.DAY_OF_YEAR, -1)
+        val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
         simpleDateFormat.timeZone = timeZone
-        MainController.instance.insertStats(user!!.name, MainController.instance.getScore(), SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time)))
+        MainController.instance.insertStats(user!!.name, MainController.instance.getScore(), SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time)))
 
         val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)

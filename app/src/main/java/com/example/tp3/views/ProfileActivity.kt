@@ -82,7 +82,7 @@ class ProfileActivity : AppCompatActivity() {
         if (newPassword.text.toString().isNotEmpty()) {
             user!!.password = newPassword.text.toString()
         }
-        if (findViewById<RadioButton>(R.id.easy_button).isChecked) {
+        if (findViewById<RadioButton>(R.id.all_button).isChecked) {
             user!!.difficulty = "Easy"
         } else {
             user!!.difficulty = "Hard"
@@ -93,9 +93,9 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setRadioButtons() {
         if (user!!.difficulty == "Easy") {
-            findViewById<RadioButton>(R.id.easy_button).isChecked = true
+            findViewById<RadioButton>(R.id.all_button).isChecked = true
         } else {
-            findViewById<RadioButton>(R.id.hard_button).isChecked = true
+            findViewById<RadioButton>(R.id.sevenDays_button).isChecked = true
         }
     }
 }

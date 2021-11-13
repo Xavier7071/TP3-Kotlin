@@ -7,6 +7,7 @@ import com.example.tp3.models.GlobalStatistics
 import com.example.tp3.models.UserStatistics
 import com.example.tp3.models.Users
 import com.example.tp3.models.WordManager
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -30,6 +31,10 @@ class MainController private constructor() {
         userList.add(Users(2, "Christopher", "Masse", "Easy"))
         userList.add(Users(3, "Admin", "admin", "Easy"))
 
+        globalStatistics.add(GlobalStatistics(1, "Xavier", 20, SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("10 11 2021")))
+        globalStatistics.add(GlobalStatistics(2, "Christopher", 20, SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("12 10 2021")))
+        globalStatistics.add(GlobalStatistics(3, "Admin", 10, SimpleDateFormat("dd MM yyyy", Locale.CANADA).parse("1 11 2021")))
+
         database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database")
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
@@ -37,6 +42,11 @@ class MainController private constructor() {
 
         try {
             database!!.databaseDAO().insertAllUsers(userList)
+        } catch (ex: Exception) {
+            Log.d("logdemo", "Records already in Database: ${ex.message}")
+        }
+        try {
+            database!!.databaseDAO().insertAllStatistics(globalStatistics)
         } catch (ex: Exception) {
             Log.d("logdemo", "Records already in Database: ${ex.message}")
         }
@@ -145,9 +155,31 @@ class MainController private constructor() {
         )
     }
 
-    fun getLeaderboard(): ArrayList<GlobalStatistics> {
+    fun getAllLeaderboard(): ArrayList<GlobalStatistics> {
         globalStatistics.clear()
         globalStatistics.addAll(database!!.databaseDAO().findBestStatistics())
+        return globalStatistics
+    }
+
+    fun get7DaysLeaderboard(): ArrayList<GlobalStatistics> {
+        val timeZone = TimeZone.getTimeZone("America/Montreal")
+        val calendar = Calendar.getInstance(timeZone)
+        calendar.add(Calendar.DAY_OF_YEAR, -7)
+        val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
+        simpleDateFormat.timeZone = timeZone
+        globalStatistics.clear()
+        globalStatistics.addAll(database!!.databaseDAO().findStatisticsWithFilter(SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time))))
+        return globalStatistics
+    }
+
+    fun get30DaysLeaderboard(): ArrayList<GlobalStatistics> {
+        val timeZone = TimeZone.getTimeZone("America/Montreal")
+        val calendar = Calendar.getInstance(timeZone)
+        calendar.add(Calendar.DAY_OF_YEAR, -30)
+        val simpleDateFormat = SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA)
+        simpleDateFormat.timeZone = timeZone
+        globalStatistics.clear()
+        globalStatistics.addAll(database!!.databaseDAO().findStatisticsWithFilter(SimpleDateFormat("EE MMM dd HH:mm:ss zzz yyyy", Locale.CANADA).parse(simpleDateFormat.format(calendar.time))))
         return globalStatistics
     }
 }

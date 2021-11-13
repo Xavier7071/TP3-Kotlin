@@ -12,28 +12,17 @@
         android:layout_height="match_parent"
         tools:context=".views.LeaderboardActivity">
 
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="129dp"
-            android:layout_height="105dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo" />
-
         <TextView
             android:id="@+id/word_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="@string/leaderboard"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
             android:id="@+id/radioGroup2"
@@ -42,10 +31,10 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.331">
+            app:layout_constraintVertical_bias="0.148">
 
             <RadioButton
                 android:id="@+id/all_button"
@@ -71,13 +60,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMain"
-            android:layout_width="326dp"
-            android:layout_height="260dp"
+            android:layout_width="311dp"
+            android:layout_height="219dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/word_view" />
+            app:layout_constraintTop_toBottomOf="@+id/word_view"
+            app:layout_constraintVertical_bias="0.945" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
